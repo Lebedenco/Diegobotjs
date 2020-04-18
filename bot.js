@@ -16,14 +16,15 @@ const token = process.env.TOKEN;
 const mcServerIP = process.env.IP;
 const mcServerPort = process.env.PORT;
 const craftoApi = process.env.CRAFTOAPIKEY;
+const diegoId = process.env.DIEGOID;
+const memeChannelID = process.env.MEMECHANNELID;
+const botId = process.env.DIEGOBOTID;
 
 let status = 'Iniciando Ping...';
 let mcServerMOTD = 'N/A';
 let mcServerVersion = 0;
 let mcServerPlayersOnline = 0;
 let mcServerMaxPlayers = 0;
-
-const memeChannelID = process.env.MEMECHANNELID;
 
 const showError = (error) => {
   let err = 'Error!';
@@ -85,8 +86,8 @@ client.on('ready', () => {
 });
 
 client.on('message', async (msg) => {
-  if (msg.channel instanceof DMChannel && msg.author.id !== process.env.DIEGOID) {
-    const diego = client.users.cache.get(process.env.DIEGOID);
+  if (msg.channel instanceof DMChannel && msg.author.id !== botId) {
+    const diego = client.users.cache.get(diegoId);
 
     diego.send(`${msg.author}: ${msg.content}`);
   }
@@ -273,7 +274,7 @@ client.on('message', async (msg) => {
       });
   }
 
-  if (msg.content.startsWith('.addCrafting') && msg.member.id === process.env.DIEGOID) {
+  if (msg.content.startsWith('.addCrafting') && msg.member.id === diegoId) {
     const item = msg.content.split(' ')[1];
     const crafting = msg.content.split(' ')[2];
 
@@ -294,11 +295,15 @@ client.on('message', async (msg) => {
       });
   }
 
+  if (msg.content === '.github') {
+    msg.channel.send('https://github.com/Lebedenco/Diegobotjs');
+  }
+
   if (msg.content === '.help') {
     const embed = new MessageEmbed()
       .setTitle('Diegobot')
       .setDescription('Bot para uso pessoal.')
-      .addField('**Comandos: **', '``.statusServidor``\n``.ip``\n``.crafting [versão:nome_do_item]``\n``.mal [usuário]``\n``.queEngracado``\n``.danbooru [tag]``\n``.18danbooru [tag]``\n``.correioAnonimo|[menção/ID do usuário]|[Mensagem] (WIP)``', true)
+      .addField('**Comandos: **', '``.statusServidor``\n``.ip``\n``.crafting [versão:nome_do_item]``\n``.mal [usuário]``\n``.queEngracado``\n``.danbooru [tag]``\n``.18danbooru [tag]``\n``.correioAnonimo|[menção/ID do usuário]|[Mensagem] (WIP)``\n``.github``', true)
       .setColor(0xFF1493)
       .setThumbnail('https://avatars2.githubusercontent.com/u/31379034?s=460&u=69f122143dde7a2a8b3d9dbfac2aa44d208b92e8&v=4')
       .setImage('https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/41/41e82d8c2716b4847af3ef01a0270462dff4b3fc_full.jpg')
