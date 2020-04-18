@@ -1,0 +1,26 @@
+{
+  "name": "diegobotjs",
+  "version": "1.0.0",
+  "description": "Discord bot for personal use.",
+  "main": "bot.js",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "canvas": "^2.6.1",
+    "danbooru": "^3.1.0",
+    "discord.js": "^12.1.1",
+    "dotenv": "^8.2.0",
+    "jikan-node": "^1.2.0",
+    "node-cron": "^2.0.3",
+    "node-lolibooru": "^0.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "bot",
+    "discord"
+  ],
+  "author": "Diego Lebedenco",
+  "license": "ISC"
+}
