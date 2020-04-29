@@ -8,7 +8,7 @@ exports.run = async (client, msg, args) => {
       .setTitle('.avatar')
       .setDescription('Ao fornecer um usuário, retorna uma montagem de seu avatar fazendo análise.')
       .addField('**Aliases**', 'Não possui aliases.', true)
-      .addField('**Argumentos**', '``imagem (string)``', true)
+      .addField('**Argumentos**', '``user (string)``', true)
       .setFooter('.help')
     );
   }
@@ -51,7 +51,7 @@ exports.help = {
   aliases: [],
   description: 'Ao fornecer um usuário, retorna uma montagem de seu avatar fazendo análise.',
   args: [{
-    'name': 'imagem',
+    'name': 'user',
     'expects': 'string',
     'alias': ''
   }]
