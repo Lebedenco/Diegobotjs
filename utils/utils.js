@@ -58,6 +58,11 @@ module.exports = {
               name: name.substring(2),
               value
             })
+          } else {
+            args.push({
+              name: name.substring(2),
+              value: true
+            })
           }
         } else if (newString[0] == '-'){
           const name = newString.split('=')[0];
