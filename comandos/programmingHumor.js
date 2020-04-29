@@ -3,8 +3,6 @@ const Discord = require('discord.js');
 const utils = require('../utils/utils');
 
 exports.run = (client, msg, args) => {
-  console.log(args);
-  
   if (args.find(arg => (arg.name === 'help' && arg.value === 'true') || arg.name === 'h')) {
     return msg.channel.send(new Discord.MessageEmbed()
       .setTitle('.programmingHumor')
@@ -15,7 +13,7 @@ exports.run = (client, msg, args) => {
     );
   }
   
-  const feed = require('../feed');
+  const feed = require('../utils/feed');
 
   let numItems = 1;
   let after = 0;
