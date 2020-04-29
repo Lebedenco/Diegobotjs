@@ -13,7 +13,7 @@ exports.run = async (client, msg, args) => {
     );
   }
   
-  const canvas = require('../canvas');
+  const canvas = require('../utils/canvas');
   const avatar = require('./avatar');
   const path = require('path');
 
