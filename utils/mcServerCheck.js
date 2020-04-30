@@ -10,12 +10,11 @@ let mcServerMaxPlayers = 0;
 let version = 0;
 
 module.exports = {
-
   start: function(port, ip, timeout, callback) {
     this.ip = ip;
     this.port = port;
 
-    if (typeof(timeout === Function())) {
+    if (typeof(timeout) === Function()) {
       callback = timeout;
       timeout = 10;
     }
@@ -46,9 +45,10 @@ module.exports = {
     });
 
     server.on('timeout', () => {
+      this.isOnline = false;
+      
       callback();
       server.end();
-      process.exit();
     });
 
     server.on('end', () => {
@@ -56,15 +56,11 @@ module.exports = {
     });
 
     server.on('error', (err) => {
-      
-      if(err.code == "ENOTFOUND")
-      {
-        console.log("Erro: ENOTFOUND!");
+      if(err.code === 'ENOTFOUND') {
         return;
-      }
-      if(err.code == "ECONNREFUSED")
-      {
-        console.log("Erro: ECONNREFUSED!");
+      } else if(err.code === 'ECONNREFUSED') {
+        return;
+      } else if (err.code === 'ETIMEDOUT') {
         return;
       }
 

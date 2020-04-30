@@ -61,11 +61,7 @@ module.exports = {
     const canvas = createCanvas(241, 241);
     const ctx = canvas.getContext('2d');
 
-    console.log('Starting loading image...');
-
     const image = await loadImage(dataurl);
-
-    console.log('Finished loading image...');
 
     ctx.drawImage(image, 0, 0, 241, 241);
 

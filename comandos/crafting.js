@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const utils = require('../utils/utils');
 
 exports.run = async (client, msg, args) => {
-  if (args.find(arg => (arg.name === 'help' && arg.value === 'true') || arg.name === 'h')) {
+  if (args.find(arg => (arg.name === 'help' || arg.name === 'h') && arg.value === 'true')) {
     return msg.channel.send(new Discord.MessageEmbed()
       .setTitle('.crafting')
       .setDescription('Retorna a receita de crafting de um dado item. Ex: crafting stone_pickaxe -> Retornará a receita de crafting da Picareta de Pedra.' +
@@ -14,7 +14,7 @@ exports.run = async (client, msg, args) => {
     );
   }
 
-  const canvas = require('../canvas');
+  const canvas = require('../utils/canvas');
   const axios = require('axios');
   const request = msg.content.split(' ')[1];
 

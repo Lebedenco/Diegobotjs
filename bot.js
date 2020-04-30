@@ -60,15 +60,19 @@ const loadEvents = () => {
 };
 
 const start = async () => {
-  console.log('Iniciando...');
+  console.log('[INICIALIZAÇÃO] Iniciando...');
   
-  await client.login(token);
+  await client.login(token).catch(err => console.error('[LOGIN] ', err));
   
+  console.log('[INICIALIZAÇÃO] Carregando eventos...');
   loadEvents();
+
+  console.log('[INICIALIZAÇÃO] Carregando comandos...');
   loadCommands();
   
+  console.log('[INICIALIZAÇÃO] Começando intervalo para pings a cada 5 segundos...');
   setInterval(() => {    
-    mcServerCheck.start(mcServerPort, mcServerIP, (res) => {
+    mcServerCheck.start(mcServerPort, mcServerIP, 10, (res) => {
       if (mcServerCheck.isOnline) {
         client.status = `Status do Servidor: Online!`;
         client.mcServerPlayersOnline = mcServerCheck.mcServerCurPlayers;
@@ -78,10 +82,11 @@ const start = async () => {
       } else {
         client.status = `Status do Servidor: Offline!`;
       }
-    })
+    });
+
     client.user.setActivity(`${client.status} ${client.mcServerPlayersOnline}/${client.mcServerMaxPlayers} jogadores online.`, {
       type: 0
-    })
+    }).catch(err => console.error('[TROCA DE STATUS] ', err));
   }, 5000);
 };
 

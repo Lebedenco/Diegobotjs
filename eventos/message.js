@@ -31,6 +31,7 @@ const message = async (client, msg) => {
   const command = getCommand(client, cmd);
 
   if (command) {
+    console.log(`[COMANDO.RUN] ${command.help.name} Argumentos: ${args.length > 0 ? args.map(arg => arg.name + ' = ' + arg.value) : ' '}`);
     command.run(client, msg, args)
   }
 };

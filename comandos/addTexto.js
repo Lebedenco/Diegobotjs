@@ -4,7 +4,7 @@ const utils = require('../utils/utils');
 const canvas = require('../utils/canvas');
 
 exports.run = async (client, msg, args) => {
-  if (args.find(arg => (arg.name === 'help' && arg.value === 'true') || arg.name === 'h')) {
+  if (args.find(arg => (arg.name === 'help' || arg.name === 'h') && arg.value === 'true')) {
     return msg.channel.send(new Discord.MessageEmbed()
       .setTitle('.addTexto')
       .setDescription('Adiciona um texto à uma dada imagem.')

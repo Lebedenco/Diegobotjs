@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const utils = require('../utils/utils');
 
 exports.run = (client, msg, args) => {
-  if (args.find(arg => (arg.name === 'help' && arg.value === 'true') || arg.name === 'h')) {
+  if (args.find(arg => (arg.name === 'help' || arg.name === 'h') && arg.value === 'true')) {
     return msg.channel.send(new Discord.MessageEmbed()
       .setTitle('.ip')
       .setDescription('Retorna o IP do Servidor de Minecraft com Mods.')

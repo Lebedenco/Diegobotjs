@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const utils = require('../utils/utils');
 
 exports.run = (client, msg, args, commandFlag) => {
-  if (args.find(arg => (arg.name === 'help' && arg.value === 'true') || arg.name === 'h')) {
+  if (args.find(arg => (arg.name === 'help' || arg.name === 'h') && arg.value === 'true')) {
     return msg.channel.send(new Discord.MessageEmbed()
       .setTitle('.avatar')
       .setDescription('Retorna o avatar de um dado usuário, ou o seu próprio avatar caso não haja argumento.')

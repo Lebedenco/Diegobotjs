@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const utils = require('../utils/utils');
 
 exports.run = async (client, msg, args) => {
-  if (args.find(arg => (arg.name === 'help' && arg.value === 'true') || arg.name === 'h')) {
+  if (args.find(arg => (arg.name === 'help' || arg.name === 'h') && arg.value === 'true')) {
     return msg.channel.send(new Discord.MessageEmbed()
       .setTitle('.avatar')
       .setDescription('Ao fornecer um usuário, retorna uma montagem de seu avatar fazendo análise.')
