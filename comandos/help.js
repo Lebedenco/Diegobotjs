@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const fs = require('fs');
 
 exports.run = (client, msg, args) => {
-  if (args.find(arg => (arg.name === 'help' || arg.name === 'h') && arg.value === 'true')) {
+  if (args.find(arg => (arg.name === 'help' || arg.name === 'h') && arg.value.toString() === 'true')) {
     return msg.channel.send(new Discord.MessageEmbed()
       .setTitle('.help')
       .setDescription('Retorna a descrição do bot, e uma lista de comandos. Também serve para retornar a descrição de cada comando. Exemplo: \`\`.help <comando>\`\`')

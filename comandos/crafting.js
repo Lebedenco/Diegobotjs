@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const utils = require('../utils/utils');
 
 exports.run = async (client, msg, args) => {
-  if (args.find(arg => (arg.name === 'help' || arg.name === 'h') && arg.value === 'true')) {
+  if (args.find(arg => (arg.name === 'help' || arg.name === 'h') && arg.value.toString() === 'true')) {
     return msg.channel.send(new Discord.MessageEmbed()
       .setTitle('.crafting')
       .setDescription('Retorna a receita de crafting de um dado item. Ex: crafting stone_pickaxe -> Retornará a receita de crafting da Picareta de Pedra.' +
