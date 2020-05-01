@@ -20,7 +20,7 @@ exports.run = async (client, msg, args) => {
   let user;
 
   if (args.length > 0) {
-    user = args.find(arg => arg.name.startsWith('txtArg1')).value;
+    user = args.find(arg => arg.name.startsWith('message1')).value;
   }
 
   if (user) {
@@ -30,7 +30,7 @@ exports.run = async (client, msg, args) => {
   }
 
   const image = await canvas.analise(avatar.run(client, msg, [{
-      name: 'txtArg1',
+      name: 'message1',
       value: user
     }, {
       name: 'format',

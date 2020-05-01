@@ -24,7 +24,7 @@ exports.run = (client, msg, args) => {
 
   if (argumentos) {
     argumentos.forEach(a => {
-      if (a.name.startsWith('txtArg1')) {
+      if (a.name.startsWith('message1')) {
         value = a.value;
       } else if (a.value) {
         arg = a.name;

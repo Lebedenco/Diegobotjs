@@ -22,7 +22,7 @@ exports.run = (client, msg, args, commandFlag) => {
 
   if (argumentos.length > 0) {
     argumentos.forEach(arg => {
-      if (arg.name.startsWith('txtArg') && arg.value !== '') {
+      if (arg.name.startsWith('message') && arg.value !== '') {
         arg.value = utils.formatUserID(arg.value);
 
         const user = client.users.cache.get(arg.value)

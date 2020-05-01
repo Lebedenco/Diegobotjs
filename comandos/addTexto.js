@@ -17,8 +17,8 @@ exports.run = async (client, msg, args) => {
   if (args.find(arg => arg.name === 'link')) {
     let image = args.find(arg => arg.name === 'link').value;
 
-    if (args.find(arg => arg.name === 'txtArg1')) {
-      const text = args.find(arg => arg.name === 'txtArg1').value;
+    if (args.find(arg => arg.name === 'message1')) {
+      const text = args.find(arg => arg.name === 'message1').value;
 
       image = await canvas.addText(image, text, args.find(arg => arg.name === 'color') ? args.find(arg => arg.name === 'color').value : undefined);
     } else {

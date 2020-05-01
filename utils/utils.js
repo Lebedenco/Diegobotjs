@@ -45,7 +45,7 @@ module.exports = {
   getArgs: (string) => {
     let args = [];
     let newString = '';
-    let numTxtArgs = 1;
+    let numMsgArgs = 1;
 
     for (let i = 0; i <= string.length; i++) {
       if ((string[i] === ' ' && string[i + 1] === '-') || i === string.length || (newString[0] === '-' && string[i] === ' ') || (newString.startsWith('https://') && string[i] === ' ')) {
@@ -63,7 +63,7 @@ module.exports = {
 
           if (newString.split(' ')[1]) {
             args.push({
-              name: `txtArg${numTxtArgs++}`,
+              name: `message${numMsgArgs++}`,
               value: newString.split(' ')[1]
             });
 
@@ -81,7 +81,7 @@ module.exports = {
           })
         } else if (newString[0] !== '-' && newString !== '' && !newString.startsWith('https://')) {
           args.push({
-            name: `txtArg${numTxtArgs++}`,
+            name: `message${numMsgArgs++}`,
             value: newString
           })
         } else if (newString.startsWith('https://')) {
@@ -102,25 +102,25 @@ module.exports = {
     const args2 = [];
 
     args.forEach(arg => {
-      if ((typeof (arg.value) === 'string' || typeof (arg.value) === 'number') && !arg.name.startsWith('txtArg') && arg.value.split(' ')[1]) {
-        let txtArg = arg.value.split(' ');
+      if ((typeof (arg.value) === 'string' || typeof (arg.value) === 'number') && !arg.name.startsWith('message') && arg.value.split(' ')[1]) {
+        let message = arg.value.split(' ');
 
-        arg.value = txtArg[0];
-        txtArg = txtArg.splice(1).toString().replace(/,/g, ' ');
+        arg.value = message[0];
+        message = message.splice(1).toString().replace(/,/g, ' ');
 
         args2.push({
-          name: `txtArg${numTxtArgs++}`,
-          value: txtArg
+          name: `message${numMsgArgs++}`,
+          value: message
         })
-      } else if (!arg.name.startsWith('txtArg') && arg.name.split(' ')[1]) {
-        let txtArg = arg.name.split(' ');
+      } else if (!arg.name.startsWith('message') && arg.name.split(' ')[1]) {
+        let message = arg.name.split(' ');
 
-        arg.name = txtArg[0];
-        txtArg = txtArg.splice(1).toString().replace(/,/g, ' ');
+        arg.name = message[0];
+        message = message.splice(1).toString().replace(/,/g, ' ');
 
         args2.push({
-          name: `txtArg${numTxtArgs++}`,
-          value: txtArg
+          name: `message${numMsgArgs++}`,
+          value: message
         })
       }
     });

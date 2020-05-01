@@ -12,7 +12,7 @@ exports.run = (client, msg, args) => {
     );
   }
 
-  const arg = args.find(a => a.name === 'txtArg1');
+  const arg = args.find(a => a.name === 'message1');
 
   if (arg) {
     const files = fs.readdirSync(__dirname);

@@ -18,12 +18,12 @@ exports.run = async (client, msg, args) => {
 
   const rating = args.find(a => a.name === 'nsfw' && a.value === 'true') ? 'explicit' : 'safe';
 
-  if (!args.find(arg => arg.name === 'txtArg1')) {
+  if (!args.find(arg => arg.name === 'message1')) {
     return msg.channel.send(utils.showError('missing arguments'));
   }
 
   const posts = await booru.posts({
-      tags: `${args.find(a => a.name === 'txtArg1').value} rating:${rating}`
+      tags: `${args.find(a => a.name === 'message1').value} rating:${rating}`
     })
     .then(posts => {
       const index = Math.floor(Math.random() * posts.length)
