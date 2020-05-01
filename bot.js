@@ -63,7 +63,7 @@ const start = async () => {
   console.log('[INICIALIZAÇÃO] Iniciando...');
   
   await client.login(token).catch(err => console.error('[LOGIN] ', err));
-  
+
   console.log('[INICIALIZAÇÃO] Carregando eventos...');
   loadEvents();
 

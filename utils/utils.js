@@ -42,7 +42,7 @@ module.exports = {
     return id.replace(/</g, '').replace(/!/g, '').replace(/@/g, '').replace(/>/g, '');
   },
 
-  getArgs: (string) => { 
+  getArgs: (string) => {
     let args = [];
     let newString = '';
     let numTxtArgs = 1;
@@ -53,21 +53,14 @@ module.exports = {
           const name = newString.split('=')[0];
           const value = newString.split('=')[1];
 
-          if (value) {
-            args.push({
-              name: name.substring(2),
-              value
-            })
-          } else {
-            args.push({
-              name: name.substring(2),
-              value: true
-            })
-          }
-        } else if (newString[0] == '-'){
+          args.push({
+            name: name.substring(2),
+            value: value ? value : true
+          })
+        } else if (newString[0] == '-' && newString.split('=')[0].slice(1).length < 3) {
           const name = newString.split('=')[0];
           const value = newString.split('=')[1];
-          
+
           if (newString.split(' ')[1]) {
             args.push({
               name: `txtArg${numTxtArgs++}`,
@@ -80,13 +73,13 @@ module.exports = {
             });
 
             continue;
-          } 
-          
+          }
+
           args.push({
             name: name.substring(1),
             value: value ? value : true
           })
-        } else if (newString[0] !== '-' && newString !== '' && !newString.startsWith('https://')){
+        } else if (newString[0] !== '-' && newString !== '' && !newString.startsWith('https://')) {
           args.push({
             name: `txtArg${numTxtArgs++}`,
             value: newString
@@ -109,19 +102,19 @@ module.exports = {
     const args2 = [];
 
     args.forEach(arg => {
-      if ((typeof(arg.value) === 'string' || typeof(arg.value) === 'number') && !arg.name.startsWith('txtArg') && arg.value.split(' ')[1]) {
+      if ((typeof (arg.value) === 'string' || typeof (arg.value) === 'number') && !arg.name.startsWith('txtArg') && arg.value.split(' ')[1]) {
         let txtArg = arg.value.split(' ');
 
         arg.value = txtArg[0];
         txtArg = txtArg.splice(1).toString().replace(/,/g, ' ');
-        
+
         args2.push({
           name: `txtArg${numTxtArgs++}`,
           value: txtArg
         })
       } else if (!arg.name.startsWith('txtArg') && arg.name.split(' ')[1]) {
         let txtArg = arg.name.split(' ');
-        
+
         arg.name = txtArg[0];
         txtArg = txtArg.splice(1).toString().replace(/,/g, ' ');
 
@@ -131,12 +124,12 @@ module.exports = {
         })
       }
     });
-    
+
     args2.forEach(a => args.push({
       name: a.name,
       value: a.value
     }));
-    
+
     return args;
   }
 }

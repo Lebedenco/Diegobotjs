@@ -4,7 +4,8 @@ const dotenv = require('dotenv').config();
 const utils = require('../utils/utils');
 
 const prefix = process.env.PREFIX;
-const botID = process.env.DIEGOBOTID
+const botID = process.env.DIEGOBOTID;
+const diegoID = process.env.DIEGOID;
 
 const message = async (client, msg) => {
   if (msg.author.id === botID) {
@@ -16,7 +17,7 @@ const message = async (client, msg) => {
   }
 
   if (msg.channel instanceof Discord.DMChannel) {
-    const diego = client.users.cache.get(diegoId);
+    const diego = client.users.cache.get(diegoID);
 
     diego.send(`${msg.author}: ${msg.content}`);
   }
@@ -31,7 +32,7 @@ const message = async (client, msg) => {
   const command = getCommand(client, cmd);
 
   if (command) {
-    console.log(`[COMANDO.RUN] ${command.help.name} Argumentos: ${args.length > 0 ? args.map(arg => arg.name + ' = ' + arg.value) : ' '}`);
+    console.log(`[COMANDO.RUN] ${command.help.name} Argumentos:${args.length > 0 ? args.map(arg => ` ${arg.name} = ${arg.value}`) : ' '}`);
     command.run(client, msg, args)
   }
 };
