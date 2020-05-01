@@ -17,7 +17,7 @@ exports.run = (client, msg, args) => {
   if (args.find(arg => (arg.name === 'add' || arg.name === 'a') && arg.value.toString() === 'true')) {
     const message = args.find(arg => arg.name === 'message1').value;
 
-    console.log(message);
+    console.log(config.channel.id === msg.channel.id)
   }
 
   return msg.channel.send('WIP');
