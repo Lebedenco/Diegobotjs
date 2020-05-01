@@ -3,10 +3,12 @@
     "prefix": "."
   },
   "guild": [{
-    "id": "392560956552511488",
+    "id": "xxxxxxx",
     "quotes": [{
-      "id": "705514719779356763",
-      "quote": "WIP"
+      "id": "xxxxxxxxx",
+      "quote": "Example quote",
+      "author": "Diegobot",
+      "createdBy": "Diego"
     }]
   }]
 }

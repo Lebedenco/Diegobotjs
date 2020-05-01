@@ -46,6 +46,7 @@ module.exports = {
     let args = [];
     let newString = '';
     let numMsgArgs = 1;
+    let numNumArgs = 1;
 
     for (let i = 0; i <= string.length; i++) {
       if ((string[i] === ' ' && string[i + 1] === '-') || i === string.length || (newString[0] === '-' && string[i] === ' ') || (newString.startsWith('https://') && string[i] === ' ')) {
@@ -63,7 +64,7 @@ module.exports = {
 
           if (newString.split(' ')[1]) {
             args.push({
-              name: `message${numMsgArgs++}`,
+              name: parseInt(newString.split(' ')[1]) === NaN ? `message${numMsgArgs++}` : `number${numNumArgs++}`,
               value: newString.split(' ')[1]
             });
 
@@ -81,7 +82,7 @@ module.exports = {
           })
         } else if (newString[0] !== '-' && newString !== '' && !newString.startsWith('https://')) {
           args.push({
-            name: `message${numMsgArgs++}`,
+            name: parseInt(newString.split(' ')[1]) === NaN ? `message${numMsgArgs++}` : `number${numNumArgs++}`,
             value: newString
           })
         } else if (newString.startsWith('https://')) {
