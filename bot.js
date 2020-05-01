@@ -3,6 +3,7 @@ const dotenv = require('dotenv').config();
 
 const mcServerCheck = require('./utils/mcServerCheck');
 const utils = require('./utils/utils');
+const config = require('./config/config.json');
 
 const client = new Discord.Client();
 
@@ -12,7 +13,7 @@ const mcServerPort = process.env.PORT;
 const craftoApi = process.env.CRAFTOAPIKEY;
 const diegoId = process.env.DIEGOID;
 const memeChannelID = process.env.MEMECHANNELID;
-const prefix = process.env.PREFIX;
+const prefix = config.global.prefix;
 
 client.status = 'Iniciando Ping...';
 client.mcServerMOTD = 'N/A';

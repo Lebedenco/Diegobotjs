@@ -2,8 +2,9 @@ const Discord = require('discord.js');
 const dotenv = require('dotenv').config();
 
 const utils = require('../utils/utils');
+const config = require('../config/config.json');
 
-const prefix = process.env.PREFIX;
+const prefix = config.global.prefix;
 const botID = process.env.DIEGOBOTID;
 const diegoID = process.env.DIEGOID;
 
