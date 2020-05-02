@@ -8,6 +8,7 @@ exports.run = (client, msg, args) => {
       .setDescription('Cancela um dado usuário.')
       .addField('**Aliases**', '``cancel``', true)
       .addField('**Argumentos**', '``user (string)``\n``motivo (string)``', true)
+      .addField('**Como usar**', '``cancelar [idDoUsuário / nomeDaPessoa] [motivo]``', true)
       .setFooter('.help')
     );
   }
@@ -35,11 +36,12 @@ exports.help = {
   description: 'Cancela um dado usuário.',
   args: [{
     name: 'user',
-    expects: 'string',
+    expects: 'number',
     alias: ''
   }, {
     name: 'motivo',
     expects: 'string',
     alias: ''
-  }]
+  }],
+  usage: 'cancelar [idDoUsuário / nomeDaPessoa] [motivo]'
 }
