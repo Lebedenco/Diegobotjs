@@ -10,7 +10,7 @@ exports.run = async (client, msg, args) => {
       .setDescription('Adiciona um texto à uma dada imagem.')
       .addField('**Aliases**', '``at``\n``addText``\n``addT``', true)
       .addField('**Argumentos**', '``imagem (string/attachment)``\n``texto (string)``\n``cor | c (string)``', true)
-      .addField('**Como usar**', '``addTexto [imagem texto --cor=cor]``', true)
+      .addField('**Como usar**', '``addTexto [imagem] [texto] [--cor=cor / -c=cor]``', true)
       .setFooter('.help')
     );
   }
@@ -64,5 +64,5 @@ exports.help = {
     expects: 'string',
     alias: 'c'
   }],
-  usage: 'addTexto [imagem texto --cor=cor]'
+  usage: 'addTexto [imagem] [texto] [--cor=cor / -c=cor]'
 }
