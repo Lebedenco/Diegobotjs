@@ -9,6 +9,7 @@ exports.run = (client, msg, args, commandFlag) => {
       .setDescription('Retorna o avatar de um dado usuário, ou o seu próprio avatar caso não haja argumento.')
       .addField('**Aliases**', '``av``', true)
       .addField('**Argumentos**', '``user (string)``', true)
+      .addField('**Como usar**', '``avatar [idDoUsuário]``', true)
       .setFooter('.help')
     );
   }
@@ -61,7 +62,8 @@ exports.help = {
   description: 'Retorna o avatar de um dado usuário, ou o seu próprio avatar caso não haja argumento.',
   args: [{
     name: 'user',
-    expects: 'string',
+    expects: 'number',
     alias: ''
-  }]
+  }],
+  usage: 'avatar [idDoUsuário]'
 };
