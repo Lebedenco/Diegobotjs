@@ -43,7 +43,7 @@ exports.run = async (client, msg, args) => {
     .setTitle('Análise')
     .attachFiles(attachment)
     .setImage('attachment://image.png')
-  );//
+  );
 };
 
 exports.help = {
