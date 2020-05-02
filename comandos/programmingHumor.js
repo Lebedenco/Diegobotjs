@@ -30,8 +30,6 @@ exports.run = (client, msg, args) => {
     }
   })
 
-  console.log(numItems, limit, after)
-
   if (numItems > 10) {
     return msg.channel.send(utils.showError('Pera lá, amigão! Muitos memes, escolha um número menor!'));;
   }
