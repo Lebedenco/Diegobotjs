@@ -80,4 +80,4 @@ exports.help = {
     alias: 'c'
   }],
   usage: 'addTexto [imagem texto --cor=cor]'
-}//
+}
