@@ -4,7 +4,7 @@ const utils = require('../utils/utils');
 const canvas = require('../utils/canvas');
 
 exports.run = async (client, msg, args) => {
-  if (args.find(arg => (arg.name === 'help' || arg.name === 'h') && arg.value.toString() === 'true')) {
+  if (args.length > 0 && args.find(arg => (arg.name === 'help' || arg.name === 'h') && arg.value.toString() === 'true')) {
     return msg.channel.send(new Discord.MessageEmbed()
       .setTitle('.addTexto')
       .setDescription('Adiciona um texto à uma dada imagem.')
@@ -15,8 +15,16 @@ exports.run = async (client, msg, args) => {
     );
   }
   
-  if (args.find(arg => arg.name === 'link')) {
-    let image = args.find(arg => arg.name === 'link').value;
+  if (msg.attachments.array().length > 0) {
+    let image;
+    
+    for await (value of msg.attachments.values()) {
+      value.url ? image = value.url : undefined;
+    }
+
+    if (!image) {
+      return msg.channel.send(utils.showError(400));
+    }
 
     if (args.find(arg => arg.name === 'message1')) {
       const text = args.find(arg => arg.name === 'message1').value;
@@ -25,27 +33,6 @@ exports.run = async (client, msg, args) => {
     } else {
       return msg.channel.send(utils.showError(400));
     }
-
-    const attachment = new Discord.MessageAttachment(image, 'img.png');
-
-    return msg.channel.send(new Discord.MessageEmbed()
-      .attachFiles(attachment)
-      .setImage('attachment://img.png')
-    );
-  } else if (msg.attachments) {
-    let img;
-    
-    for await (value of msg.attachments.values()) {
-      value.url ? img = value.url : undefined;
-    }
-
-    const text = args.find(arg => arg.name === 'message1') ? args.find(arg => arg.name === 'message1').value : undefined;
-
-    if (!text || !img) {
-      return msg.channel.send(utils.showError(400));
-    }
-
-    const image = await canvas.addText(img, text, args.find(arg => (arg.name === 'color' || arg.name === 'c')) ? args.find(arg => (arg.name === 'color' || arg.name === 'c')).value : undefined);
 
     const attachment = new Discord.MessageAttachment(image, 'img.png');
 
