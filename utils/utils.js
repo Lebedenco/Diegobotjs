@@ -140,10 +140,7 @@ module.exports = {
       }
     });
 
-    console.log(args);
-
     for (let i = 0; i < args2.length; i++) {
-      console.log(args2[i], args2[i].value.split(' ')[1] !== undefined && args2[i].value.startsWith('https://'), args2[i].value.startsWith('https://'), args2[i].value.split('https')[1] !== undefined)
       if (args2[i].value.split(' ')[1] && args2[i].value.startsWith('https://')) {
         let message = args2[i].value.split(' ');
 
@@ -163,7 +160,6 @@ module.exports = {
         args2[i].value = '';
 
         for (let m = 0; m < message.length; m++) {
-          console.log(3, message);
           j++;
 
           if (message[m].startsWith('https')) {
