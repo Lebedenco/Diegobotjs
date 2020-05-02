@@ -26,15 +26,7 @@ exports.run = async (client, msg, args) => {
     guildID = msg.guild.id;
   }
 
-  const messageID = args.find(arg => arg.name === 'message1') ? args.find(arg => arg.name === 'message1').value : undefined;
-  const number = args.find(arg => arg.name === 'number1') ? args.find(arg => arg.name === 'number1').value : undefined;
-
-  if (!messageID && !number) {
-    return msg.channel.send(new Discord.MessageEmbed()
-      .setTitle('Citações')
-      .addField('Citações', `${config.guild.find(g => g.id === guildID) ? config.guild.find(g => g.id === guildID).quotes.map(quote => `\`\`${quote.quote}\`\`\nAutor: \`\`${quote.author}\`\`\nCriada por: \`\`${quote.createdBy}\`\`\n\n`) : 'Este servidor não possui citações.'}`)
-    );
-  }
+  const messageID = args.find(arg => arg.name === 'number1') ? args.find(arg => arg.name === 'number1').value : undefined;
 
   if (args.find(arg => (arg.name === 'add' || arg.name === 'a') && arg.value.toString() === 'true')) {
     let message;
@@ -64,7 +56,7 @@ exports.run = async (client, msg, args) => {
     if (existingQuote) {
       return msg.channel.send(`Essa citação já foi adicionada!\n\`\`${existingQuote.author}\`\`: ${existingQuote.quote}`);
     }
-
+    
     if (!storedGuild) {
       config.guild.push({
         id: guildID,
@@ -94,13 +86,21 @@ exports.run = async (client, msg, args) => {
       `Use \`\`.quote ${storedGuild ? storedGuild.quotes.length - 1 : 0}\`\` para ver a citação.`);
   }
 
+  const number = args.find(arg => arg.name === 'number1') ? args.find(arg => arg.name === 'number1').value : undefined;
 
   if (storedGuild) {
     const quote = storedGuild.quotes[parseInt(number)];
 
     if (quote) {
-      return msg.channel.send(`\`\`${quote.author}\`\`: ${quote.quote}`);
+      return msg.channel.send(`\`\`${quote.author}\`\`: \`\`${quote.quote}\`\``);
     }
+  }
+
+  if (!messageID && !number) {
+    return msg.channel.send(new Discord.MessageEmbed()
+      .setTitle('Citações')
+      .addField('Citações', config.guild.find(g => g.id === guildID) ? config.guild.find(g => g.id === guildID).quotes.map(quote => `\`\`${quote.quote}\`\`\nAutor: \`\`${quote.author}\`\`\nCriada por: \`\`${quote.createdBy}\`\`\n\n`) : 'Este servidor não possui citações.')
+    );
   }
 
   return msg.channel.send(utils.showError(404));
