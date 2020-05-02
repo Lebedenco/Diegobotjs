@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const fs = require('fs');
 
 exports.run = (client, msg, args) => {
+  // sendHelp
   if (args.find(arg => (arg.name === 'help' || arg.name === 'h') && arg.value.toString() === 'true')) {
     return msg.channel.send(new Discord.MessageEmbed()
       .setTitle('.help')

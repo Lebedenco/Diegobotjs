@@ -6,6 +6,7 @@ const fs = require('fs');
 const path = require('path');
 
 exports.run = async (client, msg, args) => {
+  // sendHelp
   if (args.find(arg => (arg.name === 'help' || arg.name === 'h') && arg.value.toString() === 'true')) {
     return msg.channel.send(new Discord.MessageEmbed()
       .setTitle('.quote')
