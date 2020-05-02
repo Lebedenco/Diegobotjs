@@ -9,6 +9,7 @@ exports.run = (client, msg, args) => {
       .setDescription('Retorna o código fonte da CraftoAPI, utilizada no comando crafting.')
       .addField('**Aliases**', '``api``', true)
       .addField('**Argumentos**', 'Não possui argumentos.', true)
+      .addField('**Como usar**', 'craftoapi', true)
       .setFooter('.help')
     );
   }
@@ -22,5 +23,6 @@ exports.help = {
     'api'
   ],
   description: 'Retorna o código fonte da CraftoAPI, utilizada no comando crafting.',
-  args: []
+  args: [],
+  usage: 'craftoapi'
 };
