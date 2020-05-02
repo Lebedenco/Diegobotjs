@@ -45,7 +45,7 @@ module.exports = {
   getArgs: (string) => {
     let args = [];
     let newString = '';
-    let numMsgArgs = 1;
+    let numStrArgs = 1;
     let numNumArgs = 1;
     let numLinkArgs = 1;
 
@@ -65,7 +65,7 @@ module.exports = {
 
           if (newString.split(' ')[1]) {
             args.push({
-              name: isNaN(parseInt(newString.split(' ')[1], 10)) ? `message${numMsgArgs++}` : `number${numNumArgs++}`,
+              name: isNaN(parseInt(newString.split(' ')[1], 10)) ? `string${numStrArgs++}` : `number${numNumArgs++}`,
               value: newString.split(' ')[1]
             });
 
@@ -83,7 +83,7 @@ module.exports = {
           })
         } else if (newString[0] !== '-' && newString !== '' && !newString.startsWith('https://')) {
           args.push({
-            name: isNaN(parseInt(newString, 10)) ? `message${numMsgArgs++}` : `number${numNumArgs++}`,
+            name: isNaN(parseInt(newString, 10)) ? `string${numStrArgs++}` : `number${numNumArgs++}`,
             value: newString
           })
         } else if (newString.startsWith('https://')) {
@@ -104,26 +104,26 @@ module.exports = {
     const args2 = [];
 
     args.forEach(arg => {
-      if ((typeof (arg.value) === 'string' || typeof (arg.value) === 'number') && !arg.name.startsWith('message') && arg.value.split(' ')[1]) {
+      if ((typeof (arg.value) === 'string' || typeof (arg.value) === 'number') && !arg.name.startsWith('string') && arg.value.split(' ')[1]) {
         let message = arg.value.split(' ');
 
         arg.value = message[0];
         message = message.splice(1).toString().replace(/,/g, ' ');
 
         args2.push({
-          name: `message${numMsgArgs++}`,
+          name: `string${numStrArgs++}`,
           value: message
         })
-      } else if (!arg.name.startsWith('message') && arg.name.split(' ')[1]) {
+      } else if (!arg.name.startsWith('string') && arg.name.split(' ')[1]) {
         let message = arg.name.split(' ');
         arg.name = message[0];
         message = message.splice(1).toString().replace(/,/g, ' ');
-        
+
         args2.push({
-          name: `message${numMsgArgs++}`,
+          name: `string${numStrArgs++}`,
           value: message
         })
-      } else if (arg.name.startsWith('message') && arg.value.split(' ')[1]) {
+      } else if (arg.name.startsWith('string') && arg.value.split(' ')[1]) {
         let message = arg.value.split(' ');
 
         message.forEach(m => {
@@ -133,33 +133,62 @@ module.exports = {
               value: m
             })
 
-            arg.name = `message${numMsgArgs > 1 ? --numMsgArgs : numMsgArgs}`,
-            arg.value = m
+            arg.name = `string${numStrArgs > 1 ? --numStrArgs : numStrArgs}`;
+            arg.value = arg.value.split(' https')[0];
           }
         });
       }
     });
 
-    args2.forEach(a => {
-      if (a.name.startsWith('message') && a.value.split(' ')[1] && a.value.startsWith('https://')) {
-        let message = a.value.split(' ');
+    console.log(args);
 
-        a.value = message[0];
-        a.name = `link${numLinkArgs++}`;
+    for (let i = 0; i < args2.length; i++) {
+      console.log(args2[i], args2[i].value.split(' ')[1] !== undefined && args2[i].value.startsWith('https://'), args2[i].value.startsWith('https://'), args2[i].value.split('https')[1] !== undefined)
+      if (args2[i].value.split(' ')[1] && args2[i].value.startsWith('https://')) {
+        let message = args2[i].value.split(' ');
+
+        args2[i].value = message[0];
+        args2[i].name = `link${numLinkArgs++}`;
 
         message = message.splice(1).toString().replace(/,/g, ' ');
 
-        args.push({
-          name: `message${numMsgArgs > 1 ? --numMsgArgs : numMsgArgs}`,
+        args2.push({
+          name: `string${numStrArgs > 1 ? --numStrArgs : numStrArgs}`,
           value: message
-        })
+        });
+      } else if (!args2[i].name.startsWith('link') && args2[i].value.split('https')[1]) {
+        let message = args2[i].value.split(' ');
+        let j = 0;
+
+        args2[i].value = '';
+
+        for (let m = 0; m < message.length; m++) {
+          console.log(3, message);
+          j++;
+
+          if (message[m].startsWith('https')) {
+            break;
+          }
+
+          args2[i].value += message.shift() + ' ';
+          m--;
+        }
+        args2[i].name = `string${numStrArgs++}`;
+        args2[i].value = args2[i].value.substring(0, args2[i].value.length - 1);
+
+        message = message.toString().replace(/,/g, ' ');
+
+        args2.push({
+          name: `string${numStrArgs++}`,
+          value: message
+        });
       }
 
       args.push({
-        name: a.name,
-        value: a.value
+        name: args2[i].name,
+        value: args2[i].value
       })
-    });
+    }
 
     args.sort((arg, arg2) => {
       if (arg.name > arg2.name) {

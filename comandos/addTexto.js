@@ -28,8 +28,8 @@ exports.run = async (client, msg, args) => {
     image = args.find(arg => arg.name === 'link1') ? args.find(arg => arg.name === 'link1').value : undefined;
   }
 
-  if (args.find(arg => arg.name === 'message1') && image) {
-    const text = args.find(arg => arg.name === 'message1').value;
+  if (args.find(arg => arg.name === 'string1') && image) {
+    const text = args.find(arg => arg.name === 'string1').value;
 
     image = await canvas.addText(image, text, args.find(arg => (arg.name === 'color' || arg.name === 'c')) ? args.find(arg => (arg.name === 'color' || arg.name === 'c')).value : undefined);
   } else {
