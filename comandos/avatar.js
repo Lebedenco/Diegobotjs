@@ -9,7 +9,7 @@ exports.run = (client, msg, args, commandFlag) => {
       .setTitle('.avatar')
       .setDescription('Retorna o avatar de um dado usuário, ou o seu próprio avatar caso não haja argumento.')
       .addField('**Aliases**', '``av``', true)
-      .addField('**Argumentos**', '``user (string)``', true)
+      .addField('**Argumentos**', '``user (number)``', true)
       .addField('**Como usar**', '``avatar [idDoUsuário]``')
       .setFooter('.help')
     );
