@@ -7,7 +7,7 @@ exports.run = (client, msg, args) => {
       .setTitle('.cancelar')
       .setDescription('Cancela um dado usuário.')
       .addField('**Aliases**', '``cancel``', true)
-      .addField('**Argumentos**', '``user (string)``\n``motivo (string)``', true)
+      .addField('**Argumentos**', '``user (number/string)``\n``motivo (string)``', true)
       .addField('**Como usar**', '``cancelar [idDoUsuário | nomeDaPessoa] [motivo]``', true)
       .setFooter('.help')
     );
@@ -36,7 +36,7 @@ exports.help = {
   description: 'Cancela um dado usuário.',
   args: [{
     name: 'user',
-    expects: 'number',
+    expects: 'number/string',
     alias: ''
   }, {
     name: 'motivo',
