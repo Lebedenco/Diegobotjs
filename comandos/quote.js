@@ -25,7 +25,6 @@ exports.run = async (client, msg, args) => {
     guildID = msg.guild.id;
   }
 
-  console.log(config.guild.find(g => g.id === guildID));
   const messageID = args.find(arg => arg.name === 'message1') ? args.find(arg => arg.name === 'message1').value : undefined;
   const number = args.find(arg => arg.name === 'number1') ? args.find(arg => arg.name === 'number1').value : undefined;
 
