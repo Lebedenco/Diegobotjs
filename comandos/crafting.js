@@ -6,10 +6,10 @@ exports.run = async (client, msg, args) => {
   if (args.find(arg => (arg.name === 'help' || arg.name === 'h') && arg.value.toString() === 'true')) {
     return msg.channel.send(new Discord.MessageEmbed()
       .setTitle('.crafting')
-      .setDescription('Retorna a receita de crafting de um dado item. Ex: crafting stone_pickaxe -> Retornará a receita de crafting da Picareta de Pedra.' +
-        '\nSe não for informado um argumento, será retornada uma lista com todos os itens registrados.')
+      .setDescription('Retorna a receita de crafting de um dado item. \nSe não for informado um argumento, será retornada uma lista com todos os itens registrados.')
       .addField('**Aliases**', '``craft``', true)
       .addField('**Argumentos**', '``nomeDoItem (string)``', true)
+      .addField('**Como usar**', '``crafting [nomeDoItem]``', true)
       .setFooter('.help')
     );
   }
@@ -112,11 +112,11 @@ exports.help = {
   aliases: [
     'craft'
   ],
-  description: 'Retorna a receita de crafting de um dado item. Ex: crafting stone_pickaxe -> Retornará a receita de crafting da Picareta de Pedra.' +
-    '\nSe não for informado um argumento, será retornada uma lista com todos os itens registrados.',
+  description: 'Retorna a receita de crafting de um dado item.\nSe não for informado um argumento, será retornada uma lista com todos os itens registrados.',
   args: [{
     name: 'nomeDoItem',
     expects: 'string',
     alias: ''
-  }]
+  }],
+  usage: 'crafting [nomeDoItem]'
 }
