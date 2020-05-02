@@ -17,25 +17,38 @@ exports.run = async (client, msg, args) => {
   const avatar = require('./avatar');
   const path = require('path');
 
-  let user;
+  let user, img;
 
   if (args.length > 0) {
     user = args.find(arg => arg.name.startsWith('message1')).value;
   }
 
-  if (user) {
-    user = client.users.cache.get(utils.formatUserID(user));
-  } else {
-    user = msg.author;
+  if (msg.attachments) {
+    for await (value of msg.attachments.values()) {
+      value.url ? img = value.url : '';
+    }
   }
-
-  const image = await canvas.analise(avatar.run(client, msg, [{
+  else if (user) {
+    user = client.users.cache.get(utils.formatUserID(user));
+    img = avatar.run(client, msg, [{
       name: 'message1',
       value: user
     }, {
       name: 'format',
       value: 'png'
-    }], true), path.join(__dirname, '../media/analise.png'));
+    }], true);
+  } else {
+    user = msg.author;
+    img = avatar.run(client, msg, [{
+      name: 'message1',
+      value: user
+    }, {
+      name: 'format',
+      value: 'png'
+    }], true);
+  }
+
+  const image = await canvas.analise(img, path.join(__dirname, '../media/analise.png'));
 
   const attachment = new Discord.MessageAttachment(image, 'image.png');
 
