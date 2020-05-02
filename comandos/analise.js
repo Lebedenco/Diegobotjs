@@ -9,6 +9,7 @@ exports.run = async (client, msg, args) => {
       .setDescription('Ao fornecer um usuário, retorna uma montagem de seu avatar fazendo análise.')
       .addField('**Aliases**', 'Não possui aliases.', true)
       .addField('**Argumentos**', '``user (string)``', true)
+      .addField('**Como usar**', 'analise [idDoUsuário] [imagem]', true)
       .setFooter('.help')
     );
   }
@@ -51,8 +52,13 @@ exports.help = {
   aliases: [],
   description: 'Ao fornecer um usuário, retorna uma montagem de seu avatar fazendo análise.',
   args: [{
-    'name': 'user',
-    'expects': 'string',
-    'alias': ''
-  }]
+    name: 'user',
+    expects: 'number',
+    alias: ''
+  }, {
+    name: 'imagem',
+    expects: 'link/attachment',
+    alias: ''
+  }],
+  usage: 'analise [idDoUsuário] [imagem]'
 }

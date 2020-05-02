@@ -53,7 +53,7 @@ exports.help = {
   description: 'Adiciona um texto à uma dada imagem.',
   args: [{
     name: 'imagem',
-    expects: 'string/attachment',
+    expects: 'link/attachment',
     alias: ''
   }, {
     name: 'texto',
