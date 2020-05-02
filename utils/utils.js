@@ -82,7 +82,7 @@ module.exports = {
           })
         } else if (newString[0] !== '-' && newString !== '' && !newString.startsWith('https://')) {
           args.push({
-            name: parseInt(newString.split(' ')[1]) === NaN ? `message${numMsgArgs++}` : `number${numNumArgs++}`,
+            name: parseInt(newString) === NaN || newString.length > 4 ? `message${numMsgArgs++}` : `number${numNumArgs++}`,
             value: newString
           })
         } else if (newString.startsWith('https://')) {

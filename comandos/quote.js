@@ -21,11 +21,20 @@ exports.run = async (client, msg, args) => {
 
   if (storedGuild) {
     guildID = storedGuild.id;
+  } else {
+    guildID = msg.guild.id;
   }
-  
-  const guild = msg.guild;
-  const messageID = args.find(arg => arg.name === 'message') ? args.find(arg => arg.name === 'message1').value : undefined;
+
+  console.log(config.guild.find(g => g.id === guildID));
+  const messageID = args.find(arg => arg.name === 'message1') ? args.find(arg => arg.name === 'message1').value : undefined;
   const number = args.find(arg => arg.name === 'number1') ? args.find(arg => arg.name === 'number1').value : undefined;
+
+  if (!messageID && !number) {
+    return msg.channel.send(new Discord.MessageEmbed()
+      .setTitle('Citações')
+      .addField('Citações', `${config.guild.find(g => g.id === guildID) ? config.guild.find(g => g.id === guildID).quotes.map(quote => `\`\`${quote.quote}\`\`\nAutor: \`\`${quote.author}\`\`\nCriada por: \`\`${quote.createdBy}\`\`\n\n`) : 'Este servidor não possui citações.'}`)
+    );
+  }
 
   if (args.find(arg => (arg.name === 'add' || arg.name === 'a') && arg.value.toString() === 'true')) {
     let message;
@@ -34,8 +43,8 @@ exports.run = async (client, msg, args) => {
       if (value instanceof Discord.VoiceChannel || value instanceof Discord.CategoryChannel) {
         continue;
       }
-      
-      await value.messages.fetch(messageID)
+
+      await value.messages.fetch(messageID, false)
         .then(msg => {
           message = msg;
         })
@@ -50,8 +59,10 @@ exports.run = async (client, msg, args) => {
       return msg.channel.send(utils.showError(404));
     }
 
-    if (config.guild.find(g => g.id === guildID).quotes.find(quote => quote.id === messageID)) {
-      return msg.channel.send(`Essa citação já foi adicionada!\n\`\`${storedGuild.quotes[Number(number)].author}\`\`: ${storedGuild.quotes[Number(number)].quote}`);
+    const existingQuote = storedGuild ? storedGuild.quotes.find(quote => quote.id === messageID) : undefined;
+
+    if (existingQuote) {
+      return msg.channel.send(`Essa citação já foi adicionada!\n\`\`${existingQuote.author}\`\`: ${existingQuote.quote}`);
     }
 
     if (!storedGuild) {
@@ -65,7 +76,7 @@ exports.run = async (client, msg, args) => {
         }]
       });
     } else {
-      config.guild.find(g => g.id === guildID).quotes.push({
+      storedGuild.quotes.push({
         id: message.id,
         quote: message.content,
         author: message.author.username,
@@ -80,13 +91,16 @@ exports.run = async (client, msg, args) => {
     });
 
     return msg.channel.send(`Citação adicionada com sucesso! ` +
-      `Use \`\`.quote ${config.guild.find(g => g.id === msg.guild.id).quotes.length - 1}\`\` para ver a citação.`);
+      `Use \`\`.quote ${storedGuild ? storedGuild.quotes.length - 1 : 0}\`\` para ver a citação.`);
   }
 
-  const quote = storedGuild.quotes[parseInt(number)];
 
-  if (quote) {
-    return msg.channel.send(`\`\`${quote.author}\`\`: ${quote.quote}`);
+  if (storedGuild) {
+    const quote = storedGuild.quotes[parseInt(number)];
+
+    if (quote) {
+      return msg.channel.send(`\`\`${quote.author}\`\`: ${quote.quote}`);
+    }
   }
 
   return msg.channel.send(utils.showError(404));
