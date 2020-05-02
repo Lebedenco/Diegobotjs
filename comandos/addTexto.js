@@ -14,35 +14,33 @@ exports.run = async (client, msg, args) => {
       .setFooter('.help')
     );
   }
-  
+
+  let image;
+
   if (msg.attachments.array().length > 0) {
-    let image;
-    
     for await (value of msg.attachments.values()) {
       value.url ? image = value.url : undefined;
     }
-
-    if (!image) {
-      return msg.channel.send(utils.showError(400));
-    }
-
-    if (args.find(arg => arg.name === 'message1')) {
-      const text = args.find(arg => arg.name === 'message1').value;
-
-      image = await canvas.addText(image, text, args.find(arg => (arg.name === 'color' || arg.name === 'c')) ? args.find(arg => (arg.name === 'color' || arg.name === 'c')).value : undefined);
-    } else {
-      return msg.channel.send(utils.showError(400));
-    }
-
-    const attachment = new Discord.MessageAttachment(image, 'img.png');
-
-    return msg.channel.send(new Discord.MessageEmbed()
-      .attachFiles(attachment)
-      .setImage('attachment://img.png')
-    );
   }
 
-  return msg.channel.send(utils.showError('missing arguments'));
+  if (!image) {
+    image = args.find(arg => arg.name === 'link1') ? args.find(arg => arg.name === 'link1').value : undefined;
+  }
+
+  if (args.find(arg => arg.name === 'message1') && image) {
+    const text = args.find(arg => arg.name === 'message1').value;
+
+    image = await canvas.addText(image, text, args.find(arg => (arg.name === 'color' || arg.name === 'c')) ? args.find(arg => (arg.name === 'color' || arg.name === 'c')).value : undefined);
+  } else {
+    return msg.channel.send(utils.showError(400));
+  }
+
+  const attachment = new Discord.MessageAttachment(image, 'img.png');
+
+  return msg.channel.send(new Discord.MessageEmbed()
+    .attachFiles(attachment)
+    .setImage('attachment://img.png')
+  );
 };
 
 exports.help = {
