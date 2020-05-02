@@ -8,7 +8,7 @@ exports.run = async (client, msg, args) => {
       .setTitle('.avatar')
       .setDescription('Ao fornecer um usuário, retorna uma montagem de seu avatar fazendo análise.')
       .addField('**Aliases**', 'Não possui aliases.', true)
-      .addField('**Argumentos**', '``user (string)``', true)
+      .addField('**Argumentos**', '``user (number)``', true)
       .addField('**Como usar**', '``analise [idDoUsuário | imagem]``')
       .setFooter('.help')
     );
