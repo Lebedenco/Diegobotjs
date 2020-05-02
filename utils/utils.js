@@ -132,7 +132,7 @@ module.exports = {
               name: `link${numLinkArgs++}`,
               value: m
             })
-          } else {
+
             arg.name = `message${numMsgArgs > 1 ? --numMsgArgs : numMsgArgs}`,
             arg.value = m
           }
@@ -162,7 +162,6 @@ module.exports = {
     });
 
     args.sort((arg, arg2) => {
-      console.log(arg.name, arg2.name);
       if (arg.name > arg2.name) {
         return 1;
       } else {
