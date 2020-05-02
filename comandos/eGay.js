@@ -8,7 +8,8 @@ exports.run = (client, msg, args) => {
       .setTitle('.eGay')
       .setDescription('Verifica se um dado usuário é gay ou não.')
       .addField('**Aliases**', '``eg``', true)
-      .addField('**Argumentos**', '``user (string)``', true)
+      .addField('**Argumentos**', '``user (number)``', true)
+      .addField('**Como usar**', '``eGay [idDoUsuário]``', true)
       .setFooter('.help')
     );
   }
@@ -28,7 +29,7 @@ exports.run = (client, msg, args) => {
 
     return msg.channel.send('Não é.');
   }
-  return msg.channel.send(utils.showError('missing arguments'));
+  return msg.channel.send(utils.showError(400));
 };
 
 exports.help = {
@@ -39,7 +40,8 @@ exports.help = {
   description: 'Verifica se um dado usuário é gay ou não.',
   args: [{
     name: 'user',
-    expects: 'string',
+    expects: 'number',
     alias: ''
-  }]
+  }],
+  usage: 'eGay [idDoUsuário]'
 };
