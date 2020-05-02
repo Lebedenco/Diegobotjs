@@ -14,7 +14,7 @@ exports.run = (client, msg, args) => {
       .setFooter('.help')
     );
   }
-  
+
   const pergunta = args.find(arg => arg.name === 'string1');
   let resposta = '',
     flag = true;
@@ -134,6 +134,8 @@ exports.run = (client, msg, args) => {
         continue;
       }
     }
+  } else {
+    return msg.channel.send(utils.showError(400));
   }
 
   const resp = resposta.substring(0, 1).toUpperCase();
