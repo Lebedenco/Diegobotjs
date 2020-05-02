@@ -127,6 +127,10 @@ exports.run = (client, msg, args) => {
         resposta += 'z';
 
         continue;
+      } else if (letra > 260 && letra <= 270) {
+        resposta += ' ';
+
+        continue;
       } else {
         resposta += '. Adeus.';
         flag = false;
