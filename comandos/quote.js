@@ -12,6 +12,7 @@ exports.run = async (client, msg, args) => {
       .setDescription('Retorna uma citação.')
       .addField('**Aliases**', '``citacao``\n``citação``\n``q``', true)
       .addField('**Argumentos**', '``número (number)``\n``add | a (boolean)``\n``mensagem (string)``', true)
+      .addField('**Como usar**', '``quote [númeroDaQuote] [--add idDaMensagem]``', true)
       .setFooter('.help')
     );
   }
@@ -125,5 +126,6 @@ exports.help = {
     name: 'mensagem',
     expects: 'string',
     alias: ''
-  }]
+  }],
+  usage: 'quote [númeroDaQuote] [--add idDaMensagem]'
 }

@@ -19,34 +19,21 @@ exports.run = async (client, msg, args) => {
 
   let user, img;
 
-  if (args.length > 0) {
-    user = args.find(arg => arg.name.startsWith('message1')).value;
-  }
+  img = args.find(arg => arg.name === 'number1') ? args.find(arg => arg.name === 'number1').value : undefined;
 
-  if (msg.attachments) {
+  if (!img) {
     for await (value of msg.attachments.values()) {
-      value.url ? img = value.url : '';
+      value.url ? img = value.url : img = undefined;
     }
-  }
-  else if (user) {
-    user = client.users.cache.get(utils.formatUserID(user));
-    img = avatar.run(client, msg, [{
-      name: 'message1',
-      value: user
-    }, {
-      name: 'format',
-      value: 'png'
-    }], true);
-  } else {
-    user = msg.author;
-    img = avatar.run(client, msg, [{
-      name: 'message1',
-      value: user
-    }, {
-      name: 'format',
-      value: 'png'
-    }], true);
-  }
+
+    if (!img) {
+      img = args.find(arg => arg.name === 'link1') ? args.find(arg => arg.name === 'link1').value : undefined;
+
+      if (!img) {
+        img = avatar.run(client, msg, [], true);
+      }
+    }
+  } 
 
   const image = await canvas.analise(img, path.join(__dirname, '../media/analise.png'));
 

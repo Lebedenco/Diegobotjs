@@ -47,6 +47,7 @@ module.exports = {
     let newString = '';
     let numMsgArgs = 1;
     let numNumArgs = 1;
+    let numLinkArgs = 1;
 
     for (let i = 0; i <= string.length; i++) {
       if ((string[i] === ' ' && string[i + 1] === '-') || i === string.length || (newString[0] === '-' && string[i] === ' ') || (newString.startsWith('https://') && string[i] === ' ')) {
@@ -64,7 +65,7 @@ module.exports = {
 
           if (newString.split(' ')[1]) {
             args.push({
-              name: parseInt(newString.split(' ')[1]) === NaN ? `message${numMsgArgs++}` : `number${numNumArgs++}`,
+              name: isNaN(parseInt(newString.split(' ')[1], 10)) ? `message${numMsgArgs++}` : `number${numNumArgs++}`,
               value: newString.split(' ')[1]
             });
 
@@ -82,12 +83,12 @@ module.exports = {
           })
         } else if (newString[0] !== '-' && newString !== '' && !newString.startsWith('https://')) {
           args.push({
-            name: parseInt(newString) === NaN || newString.length > 4 ? `message${numMsgArgs++}` : `number${numNumArgs++}`,
+            name: isNaN(parseInt(newString, 10)) ? `message${numMsgArgs++}` : `number${numNumArgs++}`,
             value: newString
           })
         } else if (newString.startsWith('https://')) {
           args.push({
-            name: 'link',
+            name: `link${numLinkArgs}`,
             value: newString
           })
         }
@@ -115,21 +116,61 @@ module.exports = {
         })
       } else if (!arg.name.startsWith('message') && arg.name.split(' ')[1]) {
         let message = arg.name.split(' ');
-
         arg.name = message[0];
         message = message.splice(1).toString().replace(/,/g, ' ');
-
+        
         args2.push({
           name: `message${numMsgArgs++}`,
           value: message
         })
+      } else if (arg.name.startsWith('message') && arg.value.split(' ')[1]) {
+        let message = arg.value.split(' ');
+
+        message.forEach(m => {
+          if (m.startsWith('https://')) {
+            args2.push({
+              name: `link${numLinkArgs++}`,
+              value: m
+            })
+          } else {
+            arg.name = `message${numMsgArgs > 1 ? --numMsgArgs : numMsgArgs}`,
+            arg.value = m
+          }
+        });
       }
     });
 
-    args2.forEach(a => args.push({
-      name: a.name,
-      value: a.value
-    }));
+    args2.forEach(a => {
+      if (a.name.startsWith('message') && a.value.split(' ')[1] && a.value.startsWith('https://')) {
+        let message = a.value.split(' ');
+
+        a.value = message[0];
+        a.name = `link${numLinkArgs++}`;
+
+        message = message.splice(1).toString().replace(/,/g, ' ');
+
+        args.push({
+          name: `message${numMsgArgs > 1 ? --numMsgArgs : numMsgArgs}`,
+          value: message
+        })
+      }
+
+      args.push({
+        name: a.name,
+        value: a.value
+      })
+    });
+
+    args.sort((arg, arg2) => {
+      console.log(arg.name, arg2.name);
+      if (arg.name > arg2.name) {
+        return 1;
+      } else {
+        return -1;
+      }
+
+      return 0;
+    });
 
     return args;
   }

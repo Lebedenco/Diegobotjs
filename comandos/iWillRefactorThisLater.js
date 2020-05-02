@@ -9,11 +9,16 @@ exports.run = (client, msg, args) => {
       .setDescription('Retorna a música I Will Refactor This Later.')
       .addField('**Aliases**', '``iwrtl``\n``refactor``', true)
       .addField('**Argumentos**', 'Não possui argumentos.', true)
+      .addField('**Como usar**', '``iWillRefactorThisLater [--full]``', true)
       .setFooter('.help')
     );
   }
 
-  return msg.channel.send('WIP');
+  if (args.find(arg => (arg.name === 'full' || arg.name === 'f') && arg.value.toString() === 'true')) {
+    return msg.channel.send('https://www.youtube.com/watch?v=SETnK2ny1R0');
+  }
+
+  return msg.channel.send('https://soundcloud.com/espen-sande-larsen-365984601/refactor');
 };
 
 exports.help = {
@@ -23,5 +28,10 @@ exports.help = {
     'refactor'
   ],
   description: 'Retorna a música I Will Refactor This Later.',
-  args: []
+  args: [{
+    name: 'full',
+    expects: 'boolean',
+    alias: 'f'
+  }],
+  usage: 'iWillRefactorThisLater [--full]'
 }
