@@ -12,6 +12,8 @@ exports.run = (client, msg, args) => {
       .addField('**Argumentos: **', '``value (string)``\n``user | u (boolean)``\n``character | ch (boolean)``\n``anime | a (boolean)``\n``club | cl (boolean)``\n' +
       '``genre | g (boolean)``\n``magazine | m (boolean)``\n``person | pe (boolean)``\n``producer | pr (boolean)``\n``schedule | sc (boolean)``\n' +
       '``season | se (boolean)``\n``top | t (boolean)``')
+      .addField('**Como usar**', '``mal [--user | --anime | --character | --club | --genre | --magazine | --person | --producer | --schedule | --season | --top] ' + 
+      '[valorQueDesejaBuscar]``')
       .setFooter('.help')
     );
   }
@@ -141,5 +143,6 @@ exports.help = {
     name: 'top',
     expects: 'boolean',
     alias: 't'
-  }]
+  }],
+  usage: 'mal [--user | --anime | --character | --club | --genre | --magazine | --person | --producer | --schedule | --season | --top] [valorQueDesejaBuscar]'
 };

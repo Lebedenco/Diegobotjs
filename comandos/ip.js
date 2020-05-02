@@ -9,6 +9,7 @@ exports.run = (client, msg, args) => {
       .setDescription('Retorna o IP do Servidor de Minecraft com Mods.')
       .addField('**Aliases**', 'Não possui aliases.', true)
       .addField('**Argumentos**', 'Não possui argumentos.', true)
+      .addField('**Como usar**', '``ip``')
       .setFooter('.help')
       );
   }
@@ -23,5 +24,6 @@ exports.help = {
   name: 'ip',
   aliases: [],
   description: 'Retorna o IP do Servidor de Minecraft com Mods.',
-  args: []
+  args: [],
+  usage: 'ip'
 };

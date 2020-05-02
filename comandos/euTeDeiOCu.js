@@ -9,6 +9,7 @@ exports.run = (client, msg, args) => {
       .setDescription('É isso.')
       .addField('**Aliases**', '``etdoc``', true)
       .addField('**Argumentos**', 'Não possui argumentos.', true)
+      .addField('**Como usar**', '``euTeDeiOCu``')
       .setFooter('.help')
     );
   }
@@ -22,5 +23,6 @@ exports.help = {
     'etdoc'
   ],
   description: 'É isso.',
-  args: []
+  args: [], 
+  usage: 'euTeDeiOCu'
 }

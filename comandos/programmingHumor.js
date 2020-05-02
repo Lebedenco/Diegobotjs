@@ -9,6 +9,7 @@ exports.run = (client, msg, args) => {
       .setDescription('Retorna um (ou mais, fornecendo um argumento) meme do subreddit /r/ProgrammingHumor.')
       .addField('**Aliases**', '``ph``\n``pHumor``\n``programmingH``\n``programmingMeme``', true)
       .addField('**Argumentos**', '``number | n (number)``\n``limit | l (number)``\n``after | a (number)``', true)
+      .addField('**Como usar**', '``programmingHumor [--number=número] [--limit=número] [--after=número]``')
       .setFooter('.help')
     );
   }
@@ -75,5 +76,6 @@ exports.help = {
     name: 'after',
     expects: 'number',
     alias: 'a'
-  }]
+  }],
+  usage: 'programmingHumor [--number=número] [--limit=número] [--after=número]'
 }

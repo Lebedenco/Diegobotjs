@@ -9,7 +9,7 @@ exports.run = (client, msg, args) => {
       .setDescription('Verifica se um dado usuário é gay ou não.')
       .addField('**Aliases**', '``eg``', true)
       .addField('**Argumentos**', '``user (number)``', true)
-      .addField('**Como usar**', '``eGay [idDoUsuário]``', true)
+      .addField('**Como usar**', '``eGay [idDoUsuário]``')
       .setFooter('.help')
     );
   }

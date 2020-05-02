@@ -8,7 +8,7 @@ exports.run = (client, msg, args) => {
       .setDescription('Cancela um dado usuário.')
       .addField('**Aliases**', '``cancel``', true)
       .addField('**Argumentos**', '``user (number/string)``\n``motivo (string)``', true)
-      .addField('**Como usar**', '``cancelar [idDoUsuário | nomeDaPessoa] [motivo]``', true)
+      .addField('**Como usar**', '``cancelar [idDoUsuário | nomeDaPessoa] [motivo]``')
       .setFooter('.help')
     );
   }

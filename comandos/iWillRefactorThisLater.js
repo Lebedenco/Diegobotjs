@@ -9,7 +9,7 @@ exports.run = (client, msg, args) => {
       .setDescription('Retorna a música I Will Refactor This Later.')
       .addField('**Aliases**', '``iwrtl``\n``refactor``', true)
       .addField('**Argumentos**', 'Não possui argumentos.', true)
-      .addField('**Como usar**', '``iWillRefactorThisLater [--full]``', true)
+      .addField('**Como usar**', '``iWillRefactorThisLater [--full]``')
       .setFooter('.help')
     );
   }

@@ -12,7 +12,7 @@ exports.run = async (client, msg, args) => {
       .setDescription('Retorna uma imagem do Danbooru com a tag fornecida.')
       .addField('**Aliases**', '``dan``', true)
       .addField('**Argumentos**', '``tag (string)``\n``nsfw (boolean)``', true)
-      .addField('**Como usar**', '``danbooru [tag] [--nsfw=true/false]``')
+      .addField('**Como usar**', '``danbooru [tag] [--nsfw]``')
       .setFooter('.help')
     );
   }
@@ -60,5 +60,5 @@ exports.help = {
     expects: 'boolean',
     alias: ''
   }],
-  usage: 'danbooru [tag] [--nsfw=true/false]'
+  usage: 'danbooru [tag] [--nsfw]'
 }

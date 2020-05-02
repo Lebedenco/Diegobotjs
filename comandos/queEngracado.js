@@ -9,6 +9,7 @@ exports.run = (client, msg, args) => {
       .setDescription('Retorna uma resposta para momentos engraçados.')
       .addField('**Aliases**', '``qe``', true)
       .addField('**Argumentos**', 'Não possui argumentos.', true)
+      .addField('**Como usar**', '``queEngracado``')
       .setFooter('.help')
     );
   }
@@ -26,5 +27,6 @@ exports.help = {
     'qe'
   ],
   description: 'Retorna uma resposta para momentos engraçados.',
-  args: []
+  args: [],
+  usage: 'queEngracado'
 }

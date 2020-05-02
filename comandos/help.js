@@ -5,9 +5,10 @@ exports.run = (client, msg, args) => {
   if (args.find(arg => (arg.name === 'help' || arg.name === 'h') && arg.value.toString() === 'true')) {
     return msg.channel.send(new Discord.MessageEmbed()
       .setTitle('.help')
-      .setDescription('Retorna a descrição do bot, e uma lista de comandos. Também serve para retornar a descrição de cada comando. Exemplo: \`\`.help <comando>\`\`')
+      .setDescription('Retorna a descrição do bot, e uma lista de comandos. Também serve para retornar a descrição de cada comando. Exemplo: \`\`.help [comando]\`\`')
       .addField('**Aliases**', '``h``', true)
       .addField('**Argumentos**', '``comando (string)``', true)
+      .addField('**Como usar**', '``help [comando]``')
       .setFooter('.help')
     );
   }
@@ -38,8 +39,9 @@ exports.run = (client, msg, args) => {
       return msg.channel.send(new Discord.MessageEmbed()
         .setTitle(`.${command.help.name}`)
         .setDescription(command.help.description)
-        .addField('**Aliases: **', command.help.aliases.length > 0 ? command.help.aliases : 'Não possui aliases.', true)
-        .addField('**Argumentos: **', command.help.args.length > 0 ? command.help.args.map(a => (a.alias ? a.name + ' | ' + a.alias : a.name) + (a.expects ? ' (' + a.expects + ')' : '')) : 'Não possui argumentos.', true)
+        .addField('**Aliases: **', command.help.aliases.length > 0 ? command.help.aliases.map(alias => `\`\`${alias}\`\``) : 'Não possui aliases.', true)
+        .addField('**Argumentos: **', command.help.args.length > 0 ? command.help.args.map(a => (a.alias ? `\`\`${a.name}` + ' | ' + a.alias : `\`\`${a.name}`) + (a.expects ? ' (' + a.expects + ')``' : '``')) : '``Não possui argumentos.``', true)
+        .addField('**Como usar**', `\`\`${command.help.usage}\`\``)
         .setFooter('.help')
       );
     }
@@ -77,5 +79,6 @@ exports.help = {
     name: 'comando',
     expects: 'string',
     alias: ''
-  }]
+  }],
+  usage: 'help [comando]'
 }

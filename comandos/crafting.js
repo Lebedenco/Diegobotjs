@@ -9,7 +9,7 @@ exports.run = async (client, msg, args) => {
       .setDescription('Retorna a receita de crafting de um dado item. \nSe não for informado um argumento, será retornada uma lista com todos os itens registrados.')
       .addField('**Aliases**', '``craft``', true)
       .addField('**Argumentos**', '``nomeDoItem (string)``', true)
-      .addField('**Como usar**', '``crafting [nomeDoItem]``', true)
+      .addField('**Como usar**', '``crafting [nomeDoItem]``')
       .setFooter('.help')
     );
   }

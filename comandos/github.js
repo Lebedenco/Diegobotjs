@@ -9,6 +9,7 @@ exports.run = (client, msg, args) => {
       .setDescription('Retorna o código fonte deste bot.')
       .addField('**Aliases**', '``git``\n``gh``', true)
       .addField('**Argumentos**', 'Não possui argumentos.', true)
+      .addField('**Como usar**', '``github``')
       .setFooter('.help')
     );
   }
@@ -23,5 +24,6 @@ exports.help = {
     'gh'
   ],
   description: 'Retorna o código fonte deste bot.',
-  args: []
+  args: [],
+  usage: 'github'
 };

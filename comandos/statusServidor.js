@@ -9,6 +9,7 @@ exports.run = (client, msg, args) => {
       .setDescription('Retorna o status do Servidor de Minecraft com Mods.')
       .addField('**Aliases**', '``serverStatus``\n``server``\n``servidor``', true)
       .addField('**Argumentos**', 'Não possui argumentos.', true)
+      .addField('**Como usar**', '``statusServidor``')
       .setFooter('.help')
     );
   }
@@ -41,5 +42,6 @@ exports.help = {
     'servidor'
   ],
   description: 'Retorna o status do Servidor de Minecraft com Mods.',
-  args: []
+  args: [],
+  usage: 'statusServidor'
 };
