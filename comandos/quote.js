@@ -43,7 +43,7 @@ exports.run = async (client, msg, args) => {
         continue;
       }
 
-      await value.messages.fetch(messageID, false)
+      await value.messages.fetch(messageID)
         .then(msg => {
           message = msg;
         })
